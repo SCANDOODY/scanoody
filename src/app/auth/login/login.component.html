@@ -1,0 +1,20 @@
+<form [formGroup]="loginForm">
+        <div class="container">
+            <p>{{authError?.message}}</p>
+          <h1>Login</h1>
+          <hr>
+    
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" formControlName="email" name="email">
+      
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" formControlName="password" name="psw">
+      
+          <hr>
+          <button type="submit" class="registerbtn" (click)="login()">Register</button>
+        </div>
+        
+        <div class="container signin">
+          <p>New User? <a  [routerLink]="['/registration']">register</a>.</p>
+        </div>
+      </form>

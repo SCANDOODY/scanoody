@@ -1,0 +1,4 @@
+<p *ngIf="user"> Welcome {{user?.displayName}}</p>
+<button *ngIf="!user" type="button" class="primary-btn" (click)="signIn()">Sign In</button>
+<button *ngIf="!user" type="button" class="primary-btn" (click)="registration()">Register</button>
+<button *ngIf="user" type="button" class="primary-btn" (click)="logout()">Log out</button>
