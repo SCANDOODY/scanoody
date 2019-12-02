@@ -1,0 +1,10 @@
+<div class="header-icons subheader">
+    <img src="assets/Logo.png" [routerLink]="['/home']" height="120px" width="200px">
+    <h1>SCANOODY</h1>
+</div>
+<div class="header-actions">
+    <p *ngIf="user"> Welcome {{user?.displayName}}</p>
+    <button *ngIf="!user" type="button" class="primary-btn" (click)="signIn()" nbButton>Sign In</button>
+    <button *ngIf="!user" type="button" class="primary-btn" (click)="registration()" nbButton>Register</button>
+    <button *ngIf="user" type="button" class="primary-btn" (click)="logout()" nbButton>Log out</button>
+</div>

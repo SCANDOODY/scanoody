@@ -1,6 +1,9 @@
-<div>
-    <img src="assets/Logo.png" height="125px" width="135px" [routerLink]="['/home']">
-    <h1 style="display: inline-block;vertical-align: top;">SCANOODY</h1>
-</div>
-
-<router-outlet></router-outlet>
+<nb-layout>
+    <nb-layout-header fixed>
+        <app-header class="header"></app-header>
+    </nb-layout-header>
+    <nb-layout-column class="colored-column-basic">
+        <router-outlet></router-outlet>
+    </nb-layout-column>
+    <nb-layout-footer>Contact us</nb-layout-footer>
+</nb-layout>
