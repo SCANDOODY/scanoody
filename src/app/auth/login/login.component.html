@@ -1,7 +1,7 @@
 <form [formGroup]="loginForm" autocomplete="off">
         <div class="container">
             <p>{{authError?.message}}</p>
-          <h1>Login</h1>
+          <h1>Sign In</h1>
           <hr>
     
           <label for="email"><b>Email</b></label>
@@ -11,10 +11,10 @@
           <input type="password" placeholder="Enter Password" formControlName="password" name="psw">
       
           <hr>
-          <button type="submit" class="registerbtn" (click)="login()">Register</button>
+          <button type="submit" class="registerbtn" (click)="login()">Sign In</button>
         </div>
         
         <div class="container signin">
-          <p>New User? <a  [routerLink]="['/registration']">register</a>.</p>
+          <p>New User? <a  [routerLink]="['/registration']">sign up</a>.</p>
         </div>
       </form>

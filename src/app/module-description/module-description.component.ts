@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataTransporterService } from '../injectables/data-transporter.service';
 
 @Component({
   selector: 'app-module-description',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./module-description.component.css']
 })
 export class ModuleDescriptionComponent implements OnInit {
-
-  constructor() { }
+  transporterService: DataTransporterService;
+  constructor(private readonly transporter: DataTransporterService) {
+    this.transporterService = this.transporter;
+  }
 
   ngOnInit() {
   }

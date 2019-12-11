@@ -5,6 +5,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { HomeComponent } from './home/home.component';
 import { AddItemComponent } from './module/add-item/add-item.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ModuleDescriptionComponent } from './module-description/module-description.component';
 
 
 const routes: Routes = [{
@@ -17,15 +18,21 @@ const routes: Routes = [{
 },
 {
   path: 'home',
-  component: HomeComponent
-},
-{
-  path: 'add-item',
-  component: AddItemComponent
-},
-{
-  path: 'dashboard',
-  component: DashboardComponent
+  component: HomeComponent,
+  children: [
+    {
+      path: 'dashboard',
+      component: DashboardComponent
+    },
+    {
+      path: 'add-item',
+      component: AddItemComponent
+    },
+    {
+      path: 'module-description',
+      component: ModuleDescriptionComponent
+    }
+  ]
 },
 {
   path: '', redirectTo: '/home', pathMatch: 'full'

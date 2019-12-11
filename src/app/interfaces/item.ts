@@ -5,4 +5,5 @@ export interface Item {
     expiry: Date;
     category: string;
     measureIn: string;
+    userId: string;
 }

@@ -1,7 +1,7 @@
 <form [formGroup]="addItemForm" autocomplete="off">
     <div class="container">
         <h1>Add Item</h1>
-        <p>Please fill in this form to create an account.</p>
+        <p>Add item in kitchen</p>
         <hr>
         <label for="name"><b>Name</b></label>
         <input type="text" placeholder="Enter name" formControlName="name" name="name">
@@ -14,24 +14,21 @@
         <label for="measureIn"><b>Measure In</b></label>
         <select formControlName="measureIn" name="measureIn">
             <option *ngFor="let measure of (units$|async)" [value]="measure.id">
-                {{measure.data().Name}}
+                {{measure.Name}}
             </option>
         </select>
         <!-- <input type="password" placeholder="Enter Password" formControlName="password" name="psw"> -->
-        <nb-card size="large">
-            <nb-card-body>
-                <input nbInput placeholder="Pick Expiry Date" [nbDatepicker]="formpicker"
-                    [formControl]="addItemForm.get('expiry')">
+        <label for="expiry"><b>Expiry</b></label>
+        <input nbInput placeholder="MM/DD/YYYY" [nbDatepicker]="formpicker" class="add-item-expiry"
+                    [formControl]="addItemForm.get('expiry')" name="expiry">
                 <nb-datepicker #formpicker></nb-datepicker>
-            </nb-card-body>
-        </nb-card>
         <label for="category"><b>Type</b></label>
         <select formControlName="category" name="category">
             <option *ngFor="let vr of (vr$|async)" [value]="vr.id">
-                {{vr.data().Category}}
+                {{vr.Category}}
             </option>
         </select>
         <hr>
-        <button type="submit" class="registerbtn" (click)="addItem()">Register</button>
+        <button type="submit" class="registerbtn" (click)="addItem()">Add</button>
     </div>
 </form>

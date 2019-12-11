@@ -4,7 +4,8 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbDatepickerModule, NbCardModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbDatepickerModule, NbCardModule, NbIconModule, NbActionsModule, NbMenuModule } from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,7 +49,11 @@ import { CommonModule } from '@angular/common';
     NbButtonModule,
     NbSidebarModule.forRoot(),
     NbDatepickerModule.forRoot(),
-    NbCardModule
+    NbCardModule,
+    NbEvaIconsModule,
+    NbIconModule,
+    NbActionsModule,
+    NbMenuModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

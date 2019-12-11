@@ -1,10 +1,14 @@
-<div class="header-icons subheader">
-    <img src="assets/Logo.png" [routerLink]="['/home']" height="120px" width="200px">
-    <h1>SCANOODY</h1>
-</div>
-<div class="header-actions">
-    <p *ngIf="user"> Welcome {{user?.displayName}}</p>
-    <button *ngIf="!user" type="button" class="primary-btn" (click)="signIn()" nbButton>Sign In</button>
-    <button *ngIf="!user" type="button" class="primary-btn" (click)="registration()" nbButton>Register</button>
-    <button *ngIf="user" type="button" class="primary-btn" (click)="logout()" nbButton>Log out</button>
-</div>
+<nb-layout-header fixed>
+    <div class="header-icons subheader">
+        <img src="assets/Logo.png" [routerLink]="['/home']" height="85px" width="200px">
+        <h1>SCANOODY</h1>
+    </div>
+    <div class="header-actions">
+        <p *ngIf="user"> Welcome {{user?.displayName}}</p>
+        <nb-actions size="medium">
+            <nb-action *ngIf="!user"  icon="log-in" title="Sign In" (click)="signIn()"></nb-action>
+            <nb-action *ngIf="!user" icon="person-add" title="Sign Up" (click)="registration()"></nb-action>
+            <nb-action *ngIf="user" icon="log-out" title="Sign Out" (click)="logout()"></nb-action>
+        </nb-actions>
+    </div>
+</nb-layout-header>
