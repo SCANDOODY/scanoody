@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { shareReplay, map } from 'rxjs/operators';
 import { Item } from '../interfaces/item';
 import { firestore } from 'firebase/app';
-import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +45,26 @@ export class ItemService {
             })
         }), shareReplay());
     }
-
-
+    getItems(userId: string) {
+        return this.db.collection('Items', res => res.where('UserId', '==', userId))
+            .snapshotChanges().pipe(map(list => {
+                return list.map((item) => {
+                    const id = item.payload.doc.id;
+                    return { id, ...item.payload.doc.data() }
+                })
+            }), shareReplay());
+    }
+    getItemForDashboard(userId: string) {
+        const date = new Date();
+        return this.db.collection('Items', res => res.where('UserId', '==', userId)
+            .orderBy('Expiry')
+            .startAt(new Date(date.setDate(date.getDate() - 1)))
+            .endAt(new Date(date.setDate(date.getDate() + 3))))
+            .snapshotChanges().pipe(map(list => {
+                return list.map((item) => {
+                    const id = item.payload.doc.id;
+                    return { id, ...item.payload.doc.data() }
+                })
+            }), shareReplay());
+    }
 }

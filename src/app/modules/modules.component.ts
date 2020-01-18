@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { NbMenuService } from '@nebular/theme';
 import { DataTransporterService } from '../injectables/data-transporter.service';
 import { Router } from '@angular/router';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-modules',
   templateUrl: './modules.component.html',
   styleUrls: ['./modules.component.css']
 })
-export class ModulesComponent implements OnInit {
+export class ModulesComponent implements OnInit, OnDestroy {
   newUserMenu = [
     {
       title: 'Food Expiry Notification',
@@ -36,12 +37,12 @@ export class ModulesComponent implements OnInit {
     {
       title: 'To Dashborad',
       id: 'dashboard',
-      link: ['dashboard'],
-      selected: true
+      link: ['dashboard']
     },
     {
       title: 'In Kitchen',
-      id: 'kitchen'
+      id: 'kitchen',
+      link: ['kitchen']
     },
     {
       title: 'Add Item',
@@ -50,6 +51,8 @@ export class ModulesComponent implements OnInit {
     }
   ];
   user: firebase.User;
+  alive = true;
+  selectedMenu: string;
   constructor(private readonly authService: AuthService,
     private readonly nbMenuService: NbMenuService,
     private readonly transporter: DataTransporterService,
@@ -61,7 +64,7 @@ export class ModulesComponent implements OnInit {
         this.router.navigate(['home/module-description'])
       }
     });
-    this.nbMenuService.onItemClick().subscribe((s) => {
+    this.nbMenuService.onItemClick().pipe(takeWhile(() => this.alive)).subscribe((s) => {
       this.setDescription(s.item['id']);
     });
   }
@@ -86,5 +89,7 @@ export class ModulesComponent implements OnInit {
         return;
     }
   }
-
+  ngOnDestroy() {
+    this.alive = false;
+  }
 }

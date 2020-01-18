@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { AddItemComponent } from './module/add-item/add-item.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ModuleDescriptionComponent } from './module-description/module-description.component';
+import { ViewItemComponent } from './module/view-item/view-item.component';
 
 
 const routes: Routes = [{
@@ -31,6 +32,9 @@ const routes: Routes = [{
     {
       path: 'module-description',
       component: ModuleDescriptionComponent
+    }, {
+      path: 'kitchen',
+      component: ViewItemComponent
     }
   ]
 },

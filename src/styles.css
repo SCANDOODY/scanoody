@@ -7,6 +7,8 @@
   .container {
     padding: 16px;
     background-color: white;
+    max-height: 500px;
+    overflow: auto;
   }
   
   /* Full-width input fields */
@@ -103,4 +105,7 @@
 .colored-column-success.sidebar-actions{
   max-width: 20%;
   padding: 0;
+}
+.layout{
+  min-height: auto!important;
 }

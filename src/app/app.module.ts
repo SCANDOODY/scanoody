@@ -21,6 +21,8 @@ import { ViewItemComponent } from './module/view-item/view-item.component';
 import { ModulesComponent } from './modules/modules.component';
 import { ModuleDescriptionComponent } from './module-description/module-description.component';
 import { CommonModule } from '@angular/common';
+import { VarietyPipe } from './pipes/variety.pipe';
+import { QantityPipe } from './pipes/qantity.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { CommonModule } from '@angular/common';
     AddItemComponent,
     ViewItemComponent,
     ModulesComponent,
-    ModuleDescriptionComponent
+    ModuleDescriptionComponent,
+    VarietyPipe,
+    QantityPipe
   ],
   imports: [
     BrowserModule,
