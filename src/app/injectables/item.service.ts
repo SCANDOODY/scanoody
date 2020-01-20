@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/firestore';
 import { shareReplay, map } from 'rxjs/operators';
 import { Item } from '../interfaces/item';
 import { firestore } from 'firebase/app';
@@ -47,7 +47,7 @@ export class ItemService {
     }
     getItems(userId: string) {
         return this.db.collection('Items', res => res.where('UserId', '==', userId))
-            .snapshotChanges().pipe(map(list => {
+            .snapshotChanges().pipe(map((list: DocumentChangeAction<object>[]) => {
                 return list.map((item) => {
                     const id = item.payload.doc.id;
                     return { id, ...item.payload.doc.data() }
@@ -60,11 +60,20 @@ export class ItemService {
             .orderBy('Expiry')
             .startAt(new Date(date.setDate(date.getDate() - 1)))
             .endAt(new Date(date.setDate(date.getDate() + 3))))
-            .snapshotChanges().pipe(map(list => {
+            .snapshotChanges().pipe(map((list: DocumentChangeAction<object>[]) => {
                 return list.map((item) => {
                     const id = item.payload.doc.id;
                     return { id, ...item.payload.doc.data() }
                 })
             }), shareReplay());
+    }
+    removeItem(documentId: string) {
+        return this.db.collection('Items').doc(documentId).delete();
+    }
+    updateItem(item: any) {
+        return this.itemRef.doc(item.id).update({
+            Quantity: item.quantity,
+            Category: item.category
+        });
     }
 }

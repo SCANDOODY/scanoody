@@ -5,7 +5,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbDatepickerModule, NbCardModule, NbIconModule, NbActionsModule, NbMenuModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbDatepickerModule, NbCardModule, NbIconModule, NbActionsModule, NbMenuModule, NbDialogModule } from '@nebular/theme';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { ModuleDescriptionComponent } from './module-description/module-descript
 import { CommonModule } from '@angular/common';
 import { VarietyPipe } from './pipes/variety.pipe';
 import { QantityPipe } from './pipes/qantity.pipe';
+import { UpdateItemComponent } from './module/update-item/update-item.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { QantityPipe } from './pipes/qantity.pipe';
     ModulesComponent,
     ModuleDescriptionComponent,
     VarietyPipe,
-    QantityPipe
+    QantityPipe,
+    UpdateItemComponent
   ],
   imports: [
     BrowserModule,
@@ -57,9 +59,11 @@ import { QantityPipe } from './pipes/qantity.pipe';
     NbEvaIconsModule,
     NbIconModule,
     NbActionsModule,
-    NbMenuModule.forRoot()
+    NbMenuModule.forRoot(),
+    NbDialogModule.forRoot()
   ],
   providers: [],
+  entryComponents:[UpdateItemComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

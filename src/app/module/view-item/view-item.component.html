@@ -1,16 +1,28 @@
 <table id="kitchen-items">
-    <tr>
-            <th> Category</th>
-            <th>Name</th>
-            <th>Company</th>
-            <th>Expiry</th>
-            <th>Quantity</th>
-    </tr>
-    <tr *ngFor="let item of (items$ | async)">
-            <td> {{(item.Category | variety | async)?.Category}}</td>
-            <td>{{item.Name}}</td>
-            <td>{{item.Company}}</td>
-            <td>{{ item.Expiry?.seconds * 1000 | date }}</td>
-            <td>{{item.Quantity}} {{ (item.MeasureIn | qantity | async)?.Name}}</td>
-    </tr>
+        <tr>
+                <th> Category</th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Expiry</th>
+                <th>Quantity</th>
+                <th>Action</th>
+        </tr>
+        <tr *ngFor="let item of (items$ | async)">
+                <td> {{(item.Category | variety | async)?.Category}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.Company}}</td>
+                <td>{{ item.Expiry?.seconds * 1000 | date }}</td>
+                <td>{{item.Quantity}} {{ (item.MeasureIn | qantity | async)?.Name}}</td>
+                <td>
+                        <button *ngIf="hasExpired(item.Expiry);else editTemplate" nbButton fullWidth status="danger"
+                                (click)="removeItem(item.id)">
+                                Remove
+                        </button>
+                        <ng-template #editTemplate>
+                                <button nbButton status="primary" fullWidth (click)="openEditDialog(item)">
+                                        Edit
+                                </button>
+                        </ng-template>
+                </td>
+        </tr>
 </table>

@@ -1,0 +1,21 @@
+<nb-card>
+    <nb-card-header>
+        Update Item
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="form">
+            <label for="category"><b>Category</b></label>
+            <select formControlName="category" name="category">
+                <option *ngFor="let vr of (vr$|async)" [value]="vr.id">
+                    {{vr.Category}}
+                </option>
+            </select>
+            <label for="quantity"><b>Quanity</b></label>
+            <input type="number" placeholder="Enter quantity" formControlName="quantity" name="quantity">
+        </form>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton status="primary" (click)="updateItem()">Active</button>
+        <button nbButton status="danger" (click)="close()">Cancel</button>
+    </nb-card-footer>
+</nb-card>
