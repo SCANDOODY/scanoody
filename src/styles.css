@@ -102,10 +102,16 @@
 .add-item-expiry{
   border-style: none !important;
 }
+.layout{
+  min-height: auto!important;
+}
+.colored-column-success{
+  padding: 10px;
+}
 .colored-column-success.sidebar-actions{
   max-width: 20%;
   padding: 0;
 }
-.layout{
-  min-height: auto!important;
+.nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column{
+  padding: 5px !important;
 }
