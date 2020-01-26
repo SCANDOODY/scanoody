@@ -1,3 +1,18 @@
 :host {
     height: 50vh;
   }
+  .full-width{
+    margin: 15px;
+  }
+  .full-width input, select{
+    padding: 5px;
+    width: fit-content;
+  }
+  .full-width label{
+    width: 100%;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .quick-margin{
+    margin: 5px;
+  }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 import { ItemService } from '../../injectables/item.service';
 import { AuthService } from '../../auth/auth.service';
 import { firestore } from 'firebase';
 import { NbDialogService } from '@nebular/theme';
 import { UpdateItemComponent } from '../update-item/update-item.component';
+import { SortOrder } from 'src/app/enums/sort-order.enum';
 
 
 @Component({
@@ -15,10 +16,23 @@ import { UpdateItemComponent } from '../update-item/update-item.component';
 })
 export class ViewItemComponent implements OnInit {
   items$: Observable<any>;
-  constructor(private readonly itemService: ItemService,
+  activeSort: string;
+  sortModel = {
+    category: 0,
+    company: 0,
+    expiry: 0,
+    name:0
+  };
+  itemArray = [];
+  sort = SortOrder;
+  constructor(
+    private readonly itemService: ItemService,
     private readonly authService: AuthService,
     private readonly nbService: NbDialogService) {
-    this.items$ = this.authService.getUserState().pipe(switchMap((user) => this.itemService.getItems(user.uid)))
+    this.items$ = this.authService.getUserState().pipe(
+      switchMap((user) => this.itemService.getItems(user.uid).pipe(tap((items) => this.itemArray = items))));
+    this.sortModel.expiry = SortOrder.ASC;
+    this.activeSort = 'expiry';
   }
 
   ngOnInit() {
@@ -41,4 +55,51 @@ export class ViewItemComponent implements OnInit {
     ref.componentRef.instance.item = item;
 
   }
+  sortTable(order: SortOrder, coloum: string) {
+    if (coloum === 'category') {
+      this.sortModel.category = order === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
+      this.activeSort = coloum;
+      const newMappedArray = [...this.itemService.varietyCollection].sort(compareValues('Category', order));
+      const resultArray = [];
+      newMappedArray.forEach(unit => {
+        resultArray.push(...this.itemArray.filter(item => item.Category === unit.id));
+      });
+      this.items$ = of(resultArray);
+    } else if (coloum === 'expiry') {
+      this.sortModel.expiry = order === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
+      this.activeSort = coloum;
+      this.items$ = of([...this.itemArray].sort(compareValues('Expiry', order)));
+    }else if (coloum === 'company') {
+      this.sortModel.company = order === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
+      this.activeSort = coloum;
+      this.items$ = of([...this.itemArray].sort(compareValues('Company', order)));
+    }else if (coloum === 'name') {
+      this.sortModel.name = order === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
+      this.activeSort = coloum;
+      this.items$ = of([...this.itemArray].sort(compareValues('Name', order)));
+    }
+  }
+}
+function compareValues(key: string, order = SortOrder.ASC) {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      // property doesn't exist on either object
+      return 0;
+    }
+
+    const varA = (typeof a[key] === 'string')
+      ? a[key].toUpperCase() : a[key];
+    const varB = (typeof b[key] === 'string')
+      ? b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return (
+      (order === SortOrder.DESC) ? (comparison * -1) : comparison
+    );
+  };
 }

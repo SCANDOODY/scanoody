@@ -17,7 +17,6 @@
                 {{measure.Name}}
             </option>
         </select>
-        <!-- <input type="password" placeholder="Enter Password" formControlName="password" name="psw"> -->
         <label for="expiry"><b>Expiry</b></label>
         <input nbInput placeholder="MM/DD/YYYY" [nbDatepicker]="formpicker" class="add-item-expiry"
                     [formControl]="addItemForm.get('expiry')" name="expiry">

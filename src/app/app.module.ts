@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { VarietyPipe } from './pipes/variety.pipe';
 import { QantityPipe } from './pipes/qantity.pipe';
 import { UpdateItemComponent } from './module/update-item/update-item.component';
+import { FilterItemComponent } from './module/filter-item/filter-item.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UpdateItemComponent } from './module/update-item/update-item.component'
     ModuleDescriptionComponent,
     VarietyPipe,
     QantityPipe,
-    UpdateItemComponent
+    UpdateItemComponent,
+    FilterItemComponent
   ],
   imports: [
     BrowserModule,
