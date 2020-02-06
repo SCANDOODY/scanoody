@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "update": "ng update @angular/core @angular/cli"
+    "update": "ng update @angular/core@9 @angular/cli@9"
   },
   "private": true,
   "dependencies": {
