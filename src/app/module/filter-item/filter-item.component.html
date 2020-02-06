@@ -1,7 +1,7 @@
 <nb-card size="small">
     <nb-card-body>
         <form [formGroup]="form">
-            <div formArrayName="items" *ngFor="let item of form.get('items').controls; let i = index;">
+            <div formArrayName="items" *ngFor="let item of form.get('items')['controls']; let i = index;">
                 <div [formGroupName]="i" class="item-wrapper">
                     <nb-select [formControl]="item.controls.field" (selectedChange)="clearControlAt(item,i)" shape="semi-round" fieldSize="small">
                         <nb-option *ngFor="let op of item.controls.refArr.value" [value]="op?.value">{{op?.text}}</nb-option>
@@ -17,9 +17,9 @@
                     </ng-template>
                     <nb-actions size="small">
                         <nb-action icon="minus-outline" title="Remove filter set" (click)="removeItem(i)"
-                            [disabled]="form.get('items').controls.length===1">
+                            [disabled]="form.get('items')['controls'].length===1">
                         </nb-action>
-                        <nb-action *ngIf="(form.get('items').controls.length-1)===i && !isAllItemSelected" icon="plus-outline"
+                        <nb-action *ngIf="(form.get('items')['controls'].length-1)===i && !isAllItemSelected" icon="plus-outline"
                             title="Add new filter" (click)="addItem()"></nb-action>
                     </nb-actions>
                 </div>

@@ -14,10 +14,10 @@ export class UpdateItemComponent implements OnInit {
   form: FormGroup;
   mesureIn: string;
   set item(i: any) {
-    this.form.get('id').setValue(i.id);
-    this.form.get('category').setValue(i.Category);
-    this.form.get('quantity').setValue(i.Quantity);
-    this.mesureIn = i.MeasureIn || '';
+    this.form.get('id').setValue(i?.id);
+    this.form.get('category').setValue(i?.Category);
+    this.form.get('quantity').setValue(i?.Quantity);
+    this.mesureIn = i.MeasureIn ?? '';
   }
   vr$: Observable<any>;
 
