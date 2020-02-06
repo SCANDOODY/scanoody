@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "add":"ng g c module/filter-item"
+    "add": "ng g c module/filter-item"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "@angular/router": "~8.2.14",
     "@nebular/eva-icons": "4.6.0",
     "@nebular/theme": "^4.6.0",
+    "@rxweb/reactive-form-validators": "^1.9.8",
     "eva-icons": "^1.1.2",
     "firebase": "^7.5.0",
     "rxjs": "~6.4.0",

@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, map } from 'rxjs/operators';
 import { ItemService } from '../../injectables/item.service';
 import { AuthService } from '../../auth/auth.service';
 import { firestore } from 'firebase';
 import { NbDialogService } from '@nebular/theme';
 import { UpdateItemComponent } from '../update-item/update-item.component';
-import { SortOrder } from 'src/app/enums/sort-order.enum';
+import { SortOrder } from '../../enums/sort-order.enum';
+import { FilterItemComponent } from '../filter-item/filter-item.component';
+import { FilterItem } from '../../models/filter-item.model';
 
 
 @Component({
@@ -21,10 +23,11 @@ export class ViewItemComponent implements OnInit {
     category: 0,
     company: 0,
     expiry: 0,
-    name:0
+    name: 0
   };
   itemArray = [];
   sort = SortOrder;
+  private _filterModel = new FilterItem();
   constructor(
     private readonly itemService: ItemService,
     private readonly authService: AuthService,
@@ -33,6 +36,7 @@ export class ViewItemComponent implements OnInit {
       switchMap((user) => this.itemService.getItems(user.uid).pipe(tap((items) => this.itemArray = items))));
     this.sortModel.expiry = SortOrder.ASC;
     this.activeSort = 'expiry';
+    this._filterModel.categoryFilterOptions = this.itemService.getCategory().pipe(map((x) => x.map(e => ({ text: e['Category'], value: e.id }))));
   }
 
   ngOnInit() {
@@ -69,15 +73,19 @@ export class ViewItemComponent implements OnInit {
       this.sortModel.expiry = order === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
       this.activeSort = coloum;
       this.items$ = of([...this.itemArray].sort(compareValues('Expiry', order)));
-    }else if (coloum === 'company') {
+    } else if (coloum === 'company') {
       this.sortModel.company = order === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
       this.activeSort = coloum;
       this.items$ = of([...this.itemArray].sort(compareValues('Company', order)));
-    }else if (coloum === 'name') {
+    } else if (coloum === 'name') {
       this.sortModel.name = order === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
       this.activeSort = coloum;
       this.items$ = of([...this.itemArray].sort(compareValues('Name', order)));
     }
+  }
+  openFilterDialog() {
+    const ref = this.nbService.open(FilterItemComponent, { hasBackdrop: true, closeOnEsc: false, dialogClass: 'filter-view' });
+    ref.componentRef.instance.filterModel = this._filterModel;
   }
 }
 function compareValues(key: string, order = SortOrder.ASC) {

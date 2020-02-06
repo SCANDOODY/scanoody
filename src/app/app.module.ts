@@ -5,8 +5,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbDatepickerModule, NbCardModule, NbIconModule, NbActionsModule, NbMenuModule, NbDialogModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbDatepickerModule, NbCardModule, NbIconModule, NbActionsModule, NbMenuModule, NbDialogModule, NbSelectModule, NbInputModule } from '@nebular/theme';
 
+import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -62,10 +63,13 @@ import { FilterItemComponent } from './module/filter-item/filter-item.component'
     NbIconModule,
     NbActionsModule,
     NbMenuModule.forRoot(),
-    NbDialogModule.forRoot()
+    NbDialogModule.forRoot(),
+    NbSelectModule,
+    NbInputModule,
+    RxReactiveFormsModule
   ],
   providers: [],
-  entryComponents:[UpdateItemComponent],
+  entryComponents:[UpdateItemComponent,FilterItemComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

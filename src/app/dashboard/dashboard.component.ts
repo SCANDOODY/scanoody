@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../injectables/item.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { firestore } from 'firebase';
 
 @Component({
@@ -13,9 +13,7 @@ import { firestore } from 'firebase';
 export class DashboardComponent implements OnInit {
   items$: Observable<any>;
   constructor(private readonly itemService: ItemService, private readonly authService: AuthService) {
-    this.items$ = this.authService.getUserState().pipe(switchMap((user) => this.itemService.getItemForDashboard(user.uid)), tap((item) => {
-      this.getClassName(item[0].Expiry)
-    }));
+    this.items$ = this.authService.getUserState().pipe(switchMap((user) => this.itemService.getItemForDashboard(user.uid)));
   }
 
   ngOnInit() {
