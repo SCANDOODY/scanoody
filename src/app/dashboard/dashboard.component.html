@@ -1,1 +1,25 @@
-<p>dashboard works!</p>
+<div>
+  <button nbButton status="primary" class="recipe-suggestion-btn" (click)="openSuggestion()">
+    Suggest Recipe
+</button>
+</div>
+<table id="myTable">
+    <tr>
+      <th></th>
+      <th> Category</th>
+      <th>Name</th>
+      <th>Company</th>
+      <th>Expiry</th>
+      <th>Quantity</th>
+    </tr>
+    <tr *ngFor="let item of (items$ | async)" [ngClass]="{'danger': getClassName(item?.Expiry) === 0, 'warning': getClassName(item?.Expiry) === 1 }">
+        <td>
+          <input type="checkbox" [value]="item?.Name" (change)="selectionChange($event)">
+        </td>
+        <td> {{(item.Category | variety | async)?.Category}}</td>
+        <td>{{item.Name}}</td>
+        <td>{{item.Company}}</td>
+        <td>{{ item.Expiry?.seconds * 1000 | date }}</td>
+        <td>{{item.Quantity}} {{ (item.MeasureIn | qantity | async)?.Name}}</td>
+    </tr>
+  </table>

@@ -7,6 +7,8 @@
   .container {
     padding: 16px;
     background-color: white;
+    max-height: 500px;
+    overflow: auto;
   }
   
   /* Full-width input fields */
@@ -100,7 +102,21 @@
 .add-item-expiry{
   border-style: none !important;
 }
+.layout{
+  min-height: auto!important;
+}
+.colored-column-success{
+  padding: 10px;
+}
 .colored-column-success.sidebar-actions{
   max-width: 20%;
   padding: 0;
+}
+.nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column{
+  padding: 5px !important;
+}
+.recipies-view {
+  max-width: 90% !important;
+  max-height: 90vh !important;
+  overflow: auto;
 }

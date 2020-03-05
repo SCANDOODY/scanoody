@@ -1,0 +1,28 @@
+<nb-card size="large">
+    <nb-card-header>Add Recipe</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="receipeForm">
+            <input formControlName="recipe" fullWidth type="text" nbInput fieldSize="medium" shape="semi-round"
+                placeholder="Recipe name..">
+            <div formArrayName="ingradients"
+                *ngFor="let item of receipeForm.get('ingradients')['controls']; let i = index;">
+                <div [formGroupName]="i" class="recipe-wrapper">
+                    <input formControlName="name" type="text" nbInput fieldSize="medium" shape="semi-round"
+                        placeholder="Ingradient...">
+                    <nb-actions size="small" class="inline-block-actions">
+                        <nb-action *ngIf="(receipeForm.get('ingradients')['controls'].length-1)===i" icon="plus-outline"
+                            title="Add new filter" (click)="addItem()"></nb-action>
+                    </nb-actions>
+                </div>
+            </div>
+        </form>
+        <img [src]="imageUrl" height="200" *ngIf="imageUrl">
+        <div>
+            <label for="file">Recipe Picture: </label>
+            <input type="file" nbInput (change)="upload($event)" accept=".png,.jpg" />
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="quick-margin" nbButton status="primary" (click)="addRecipe()">Add Recipe</button>
+    </nb-card-footer>
+</nb-card>

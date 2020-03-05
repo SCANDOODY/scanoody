@@ -1,16 +1,22 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { mockAngularFireAuth } from './auth/auth.service.spec';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { FirestoreStub } from './pipes/qantity.pipe.spec';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule.withRoutes([])
       ],
       declarations: [
         AppComponent
       ],
+      providers: [{ provide: AngularFireAuth, useValue: mockAngularFireAuth }, { provide: AngularFirestore, useValue: FirestoreStub }, AuthService]
     }).compileComponents();
   }));
 

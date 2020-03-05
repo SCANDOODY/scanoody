@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModuleDescriptionComponent } from './module-description.component';
+import { DataTransporterService } from '../injectables/data-transporter.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ModuleDescriptionComponent', () => {
   let component: ModuleDescriptionComponent;
@@ -8,9 +10,11 @@ describe('ModuleDescriptionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModuleDescriptionComponent ]
+      imports:[RouterTestingModule],
+      declarations: [ModuleDescriptionComponent],
+      providers: [DataTransporterService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
