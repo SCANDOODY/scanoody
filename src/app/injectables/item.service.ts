@@ -33,7 +33,7 @@ export class ItemService {
             return q.map(item => {
                 const data: Object = item.payload.doc.data();
                 const id = item.payload.doc.id;
-                return { id, ...data };
+                return { id, ...data } as any;
             })
         }), shareReplay()).pipe(tap((i) => this.varietyCollection = i));
     }
@@ -42,7 +42,7 @@ export class ItemService {
             return q.map(item => {
                 const data: Object = item.payload.doc.data();
                 const id = item.payload.doc.id;
-                return { id, ...data };
+                return { id, ...data } as any;
             })
         }), shareReplay());
     }
@@ -51,7 +51,7 @@ export class ItemService {
             .snapshotChanges().pipe(map((list: DocumentChangeAction<object>[]) => {
                 return list.map((item) => {
                     const id = item.payload.doc.id;
-                    return { id, ...item.payload.doc.data() }
+                    return { id, ...item.payload.doc.data() } as any;
                 })
             }), shareReplay());
     }
@@ -64,7 +64,7 @@ export class ItemService {
             .snapshotChanges().pipe(map((list: DocumentChangeAction<object>[]) => {
                 return list.map((item) => {
                     const id = item.payload.doc.id;
-                    return { id, ...item.payload.doc.data() }
+                    return { id, ...item.payload.doc.data() } as any;
                 })
             }), shareReplay());
     }

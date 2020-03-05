@@ -1,1 +1,29 @@
-<p>filter-item works!</p>
+<nb-card size="small">
+    <nb-card-body>
+        <form [formGroup]="form">
+            <div formArrayName="items" *ngFor="let item of form.get('items')['controls']; let i = index;">
+                <div [formGroupName]="i" class="item-wrapper">
+                    <nb-select [formControl]="item.controls.field" (selectedChange)="clearControlAt(item,i)" shape="semi-round" fieldSize="small">
+                        <nb-option *ngFor="let op of item.controls.refArr.value" [value]="op?.value">{{op?.text}}</nb-option>
+                    </nb-select>
+                    <nb-select [formControl]="item.controls.operator" placeholder="Select operator" fieldSize="small" shape="semi-round">
+                        <nb-option *ngFor="let opr of getOperators(item.controls.field.value); let o = index" [value]="opr?.value">{{opr?.text}}</nb-option>
+                    </nb-select>
+                    <nb-select *ngIf="(getControlType(item.controls.field.value) === inputType.dropdown); else inputCtrl" fieldSize="small" shape="semi-round" placeholder="Select a value" [formControl]="item.controls.value">
+                        <nb-option *ngFor="let opt of (getdropdownOpt(item.controls.field.value)| async)" [value]="opt?.value">{{opt?.text}}</nb-option>
+                    </nb-select>
+                    <ng-template #inputCtrl>
+                        <input formControlName="value" type="text" nbInput fieldSize="small" shape="semi-round" placeholder="Filter...">
+                    </ng-template>
+                    <nb-actions size="small">
+                        <nb-action icon="minus-outline" title="Remove filter set" (click)="removeItem(i)"
+                            [disabled]="form.get('items')['controls'].length===1">
+                        </nb-action>
+                        <nb-action *ngIf="(form.get('items')['controls'].length-1)===i && !isAllItemSelected" icon="plus-outline"
+                            title="Add new filter" (click)="addItem()"></nb-action>
+                    </nb-actions>
+                </div>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

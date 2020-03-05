@@ -7,6 +7,7 @@ import { AddItemComponent } from './module/add-item/add-item.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ModuleDescriptionComponent } from './module-description/module-description.component';
 import { ViewItemComponent } from './module/view-item/view-item.component';
+import { AddRecipeComponent } from './recipe/add-recipe/add-recipe.component';
 
 
 const routes: Routes = [{
@@ -35,6 +36,9 @@ const routes: Routes = [{
     }, {
       path: 'kitchen',
       component: ViewItemComponent
+    }, {
+      path: 'add-recipe',
+      component: AddRecipeComponent
     }
   ]
 },

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FilterItemComponent } from './filter-item.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NbSelectModule } from '@nebular/theme';
 
 describe('FilterItemComponent', () => {
   let component: FilterItemComponent;
@@ -8,6 +10,7 @@ describe('FilterItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports:[ReactiveFormsModule,NbSelectModule],
       declarations: [ FilterItemComponent ]
     })
     .compileComponents();

@@ -1,0 +1,10 @@
+.item-wrapper{
+    display: flex;
+    margin: 6px;
+}
+input[type="text"]{
+    margin: 5px;
+}
+.appearance-outline.size-medium.status-basic.shape-semi-round{
+    margin: 5px;
+}
