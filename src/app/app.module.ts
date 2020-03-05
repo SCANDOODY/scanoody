@@ -5,9 +5,14 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule, NbDatepickerModule, NbCardModule, NbIconModule, NbActionsModule, NbMenuModule, NbDialogModule, NbSelectModule, NbInputModule } from '@nebular/theme';
+import {
+  NbThemeModule, NbLayoutModule, NbButtonModule, NbSidebarModule,
+  NbDatepickerModule, NbCardModule, NbIconModule,
+  NbActionsModule, NbMenuModule, NbDialogModule, NbSelectModule,
+  NbInputModule
+} from '@nebular/theme';
 
-import {  RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
+import { RxReactiveFormsModule } from "@rxweb/reactive-form-validators"
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -26,6 +31,11 @@ import { VarietyPipe } from './pipes/variety.pipe';
 import { QantityPipe } from './pipes/qantity.pipe';
 import { UpdateItemComponent } from './module/update-item/update-item.component';
 import { FilterItemComponent } from './module/filter-item/filter-item.component';
+import { ViewRecipeComponent } from './recipe/view-recipe/view-recipe.component';
+import { AddRecipeComponent } from './recipe/add-recipe/add-recipe.component';
+import { RecipeComponent } from './recipe/recipe/recipe.component';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { ImageUrlPipe } from './pipes/image-url.pipe';
 
 @NgModule({
   declarations: [
@@ -42,8 +52,10 @@ import { FilterItemComponent } from './module/filter-item/filter-item.component'
     ModuleDescriptionComponent,
     VarietyPipe,
     QantityPipe,
+    ImageUrlPipe,
     UpdateItemComponent,
-    FilterItemComponent
+    FilterItemComponent,
+    RecipeComponent, AddRecipeComponent, ViewRecipeComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +64,7 @@ import { FilterItemComponent } from './module/filter-item/filter-item.component'
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     ReactiveFormsModule,
     NbThemeModule.forRoot(),
     NbLayoutModule,
@@ -69,7 +82,6 @@ import { FilterItemComponent } from './module/filter-item/filter-item.component'
     RxReactiveFormsModule
   ],
   providers: [],
-  entryComponents:[UpdateItemComponent,FilterItemComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

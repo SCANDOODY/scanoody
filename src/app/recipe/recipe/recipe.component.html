@@ -1,0 +1,13 @@
+<div class="card-row">
+<ng-container *ngFor="let recipe of recipies">
+   
+        <nb-card status="success" class="suggestion-card">
+            <nb-card-header class="card-header">{{recipe?.Recipe}}</nb-card-header>
+            <nb-card-body>
+                <label class="ingredient-label">Ingredients:</label>
+                <p *ngFor="let ing of recipe.Ingradients" class="p-tag">{{ing}}</p>
+                <img [src]="((recipe.ImgUrl | imageUrl) | async)" height="200" *ngIf="recipe.ImgUrl">
+            </nb-card-body>
+        </nb-card>
+</ng-container>
+</div>

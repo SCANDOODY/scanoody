@@ -35,7 +35,14 @@ export class FilterItemComponent implements OnInit {
   isAllItemSelected = false;
 
   constructor(private readonly formBuilder: FormBuilder) {
-
+    this.form = this.formBuilder.group({
+      items: this.formBuilder.array([this.formBuilder.group({
+        field: ['', RxwebValidators.unique()],
+        operator: [null, Validators.required],
+        value: [null, Validators.required],
+        refArr: [this.fields]
+      })])
+    });
   }
 
   ngOnInit() {

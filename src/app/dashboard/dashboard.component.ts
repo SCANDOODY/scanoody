@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../injectables/item.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap, take } from 'rxjs/operators';
 import { firestore } from 'firebase';
+import { RecipeService } from '../injectables/recipe.service';
+import { NbDialogService } from '@nebular/theme';
+import { RecipeComponent } from '../recipe/recipe/recipe.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +15,14 @@ import { firestore } from 'firebase';
 })
 export class DashboardComponent implements OnInit {
   items$: Observable<any>;
-  constructor(private readonly itemService: ItemService, private readonly authService: AuthService) {
-    this.items$ = this.authService.getUserState().pipe(switchMap((user) => this.itemService.getItemForDashboard(user.uid)));
+  selection: string[] = [];
+  user: firebase.User;
+  constructor(private readonly itemService: ItemService,
+    private readonly authService: AuthService,
+    private readonly recipeService: RecipeService,
+    private readonly nbService: NbDialogService) {
+    this.items$ = this.authService.getUserState().pipe(tap(user => this.user = user),
+      switchMap((user) => this.itemService.getItemForDashboard(user.uid)));
   }
 
   ngOnInit() {
@@ -35,5 +44,26 @@ export class DashboardComponent implements OnInit {
     } else {
       2
     }
+  }
+  openSuggestion() {
+    // console.log(this.selection);
+    if (!this.selection.length || !this.user) {
+      return;
+    }
+    this.recipeService.getReceipByUserId(this.user.uid).pipe(take(1)).subscribe((recipies) => {
+      const found = recipies.filter(res => this.selection.every(i => res.Ingradients.includes(i)));
+      if (found.length) {
+        const ref = this.nbService.open(RecipeComponent, { hasBackdrop: true, closeOnEsc: false, dialogClass: 'recipies-view' });
+        ref.componentRef.instance.recipies = found;
+      }
+    });
+  }
+  selectionChange(e) {
+    if (e.target.checked) {
+      this.selection = [...new Set([...this.selection, e.target.value])];
+      return;
+    }
+    const index = this.selection.indexOf(e.target.value);
+    this.selection.splice(index, 1);
   }
 }

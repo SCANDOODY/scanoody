@@ -48,8 +48,14 @@ export class ModulesComponent implements OnInit, OnDestroy {
       title: 'Add Item',
       id: 'addItem',
       link: ['add-item'],
+    },
+    {
+      title: 'Add Recipe',
+      id: 'addRecipe',
+      link: ['add-recipe'],
     }
   ];
+  
   user: firebase.User;
   alive = true;
   selectedMenu: string;

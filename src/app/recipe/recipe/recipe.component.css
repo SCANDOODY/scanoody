@@ -1,0 +1,19 @@
+.p-tag{
+    min-width: 300px;
+}
+.ingredient-label{
+    display: block;
+    font-size: 25px;
+    border-bottom: 2px solid gray;
+    padding-bottom: 5px;
+}
+.card-header{
+    font-size: 25px;
+}
+.suggestion-card{
+    margin: 5px;
+}
+  .card-row {
+    display: flex;
+    margin: 0 -0.5rem;
+  }
