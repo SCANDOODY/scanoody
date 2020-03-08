@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
       return;
     }
     this.recipeService.getReceipByUserId(this.user.uid).pipe(take(1)).subscribe((recipies) => {
-      const found = recipies.filter(res => this.selection.every(i => res.Ingradients.includes(i)));
+      const found = recipies.filter(res => this.selection.every(i => res.Ingradients.map(x => x.toLowerCase()).includes(i.toLowerCase())));
       if (found.length) {
         const ref = this.nbService.open(RecipeComponent, { hasBackdrop: true, closeOnEsc: false, dialogClass: 'recipies-view' });
         ref.componentRef.instance.recipies = found;

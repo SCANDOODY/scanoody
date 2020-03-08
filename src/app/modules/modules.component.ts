@@ -35,7 +35,7 @@ export class ModulesComponent implements OnInit, OnDestroy {
   ];
   userMenu = [
     {
-      title: 'To Dashborad',
+      title: 'To Dashboard',
       id: 'dashboard',
       link: ['dashboard']
     },
@@ -53,6 +53,11 @@ export class ModulesComponent implements OnInit, OnDestroy {
       title: 'Add Recipe',
       id: 'addRecipe',
       link: ['add-recipe'],
+    },
+    {
+      title: 'Recipies',
+      id: 'viewRecipe',
+      link: ['view-recipies'],
     }
   ];
   

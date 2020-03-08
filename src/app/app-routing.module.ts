@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ModuleDescriptionComponent } from './module-description/module-description.component';
 import { ViewItemComponent } from './module/view-item/view-item.component';
 import { AddRecipeComponent } from './recipe/add-recipe/add-recipe.component';
+import { ViewRecipeComponent } from './recipe/view-recipe/view-recipe.component';
 
 
 const routes: Routes = [{
@@ -39,6 +40,9 @@ const routes: Routes = [{
     }, {
       path: 'add-recipe',
       component: AddRecipeComponent
+    }, {
+      path: 'view-recipies',
+      component: ViewRecipeComponent
     }
   ]
 },
